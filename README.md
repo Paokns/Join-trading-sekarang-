@@ -1,0 +1,2 @@
+# Join-trading-sekarang-
+Oke
