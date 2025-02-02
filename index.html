@@ -134,19 +134,26 @@
             z-index: -1;
         }
 
-        .hero h1 {
+        .hero-title {
             font-size: 50px;
             font-weight: 600;
             margin-bottom: 15px;
             color: white;
             animation: fadeIn 2s ease-in-out;
+            transition: color 0.5s;
         }
 
-        .hero p {
+        .hero-subtitle {
             font-size: 22px;
             margin-bottom: 20px;
             color: white;
             animation: fadeIn 3s ease-in-out;
+            transition: color 0.5s;
+        }
+
+        body.light-mode .hero-title,
+        body.light-mode .hero-subtitle {
+            color: #1a1a1a;
         }
 
         .cta-button {
@@ -177,6 +184,7 @@
             margin-bottom: 20px;
             color: white;
             animation: fadeIn 1s ease-in-out;
+            transition: color 0.5s;
         }
 
         body.light-mode section h2 {
@@ -189,6 +197,7 @@
             margin: 0 auto;
             color: white;
             animation: fadeIn 2s ease-in-out;
+            transition: color 0.5s;
         }
 
         body.light-mode section p {
@@ -208,7 +217,7 @@
             padding: 20px;
             border-radius: 10px;
             width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s;
         }
 
         body.light-mode .feature-card {
@@ -226,6 +235,7 @@
             font-size: 24px;
             margin-bottom: 10px;
             color: white;
+            transition: color 0.5s;
         }
 
         body.light-mode .feature-card h3 {
@@ -235,6 +245,7 @@
         .feature-card p {
             font-size: 16px;
             color: white;
+            transition: color 0.5s;
         }
 
         body.light-mode .feature-card p {
@@ -271,7 +282,7 @@
             font-style: italic;
             text-align: center;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
         body.light-mode .motivational .quote {
@@ -303,6 +314,17 @@
             background-color: #ffffff;
         }
 
+        .platform-text {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+            transition: color 0.5s;
+        }
+
+        body.light-mode .platform-text {
+            color: #1a1a1a;
+        }
+
         .platform-button {
             background-color: #ff4757;
             padding: 15px 40px;
@@ -324,7 +346,7 @@
             color: white;
             padding: 20px;
             margin-top: 40px;
-            transition: background-color 0.5s;
+            transition: background-color 0.5s, color 0.5s;
         }
 
         body.light-mode footer {
@@ -358,18 +380,13 @@
                 width: 90%;
             }
 
-            .hero h1 {
+            .hero-title {
                 font-size: 36px;
             }
 
-            .hero p {
+            .hero-subtitle {
                 font-size: 18px;
             }
-        }
-
-        /* Ensure text is always white */
-        .cta-text {
-            color: white !important;
         }
     </style>
 </head>
@@ -396,8 +413,8 @@
             <source src="https://github.com/Paokns/Trading-image/raw/refs/heads/main/Animasi%20trading.mp4" type="video/mp4">
             Browser Anda tidak mendukung tag video.
         </video>
-        <h1>Belajar Trading dengan Mudah</h1>
-        <p class="cta-text">Pelajari teknik-teknik trading terbaik untuk memaksimalkan keuntungan Anda</p>
+        <h1 class="hero-title">Belajar Trading dengan Mudah</h1>
+        <p class="hero-subtitle">Pelajari teknik-teknik trading terbaik untuk memaksimalkan keuntungan Anda</p>
         <a href="https://t.me/master_trading_group" class="cta-button" target="_blank">Join Now</a>
     </section>
 
@@ -434,7 +451,7 @@
     <!-- Download Platform Section -->
     <section id="platform" class="platform-section">
         <div class="container">
-            <p style="color:white; font-size: 20px; margin-bottom: 20px;">Platform Belajar Trading untuk Pemula</p>
+            <p class="platform-text">Platform Belajar Trading untuk Pemula</p>
             <a href="https://play.google.com/store/apps/details?id=com.mobile.legends" target="_blank" class="platform-button">Download Platform</a>
         </div>
     </section>
@@ -460,7 +477,19 @@
         // Dark Mode Toggle
         function toggleDarkMode() {
             document.body.classList.toggle('light-mode');
+            
+            // Simpan preferensi mode
+            const isLightMode = document.body.classList.contains('light-mode');
+            localStorage.setItem('lightMode', isLightMode);
         }
+
+        // Load saved mode
+        window.addEventListener('load', () => {
+            const savedMode = localStorage.getItem('lightMode') === 'true';
+            if(savedMode) {
+                document.body.classList.add('light-mode');
+            }
+        });
     </script>
 
 </body>
